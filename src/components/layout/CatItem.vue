@@ -110,7 +110,7 @@ const deleteImage = () => {
             class="aspect-square object-cover shadow-2xl h-full w-full rounded-lg block"
         />
         <div class="flex gap-4 justify-between align-center px-2 py-4">
-            <div class="flex gap-4">
+            <div class="flex gap-3 lg:gap-4">
                 <button
                     @click="toggleFavourite"
                     :disabled="isFavouritePending || isLoadingFavourites"
@@ -126,11 +126,12 @@ const deleteImage = () => {
 
                 <button
                     v-if="userImage"
-                    class="text-red-700 disabled:opacity-50 disabled:cursor-wait"
+                    class="text-red-700 disabled:opacity-50 disabled:cursor-wait text-sm"
                     @click="deleteImage"
                     :disabled="deleteImagePending"
                 >
-                    Delete image
+                    <span class="max-md:hidden">Delete image</span>
+                    <span class="md:hidden">Delete</span>
                 </button>
             </div>
 
@@ -140,10 +141,6 @@ const deleteImage = () => {
                 aria-label="Rate this cat"
                 @mouseleave="hoverRating = null"
             >
-                <p class="text-sm">
-                    <span class="hidden lg:visible">Rate this image:</span>
-                    <span class="lg:hidden">Rate:</span>
-                </p>
                 <button
                     v-for="n in 5"
                     :key="n"
