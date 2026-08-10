@@ -13,7 +13,7 @@ import Button from "../style/Button.vue";
 const route = useRoute();
 const breed = computed(() => (route.query.breed as string) || "");
 
-const LIMIT = 4;
+const LIMIT = 8;
 
 const {
     isLoading,
@@ -50,7 +50,7 @@ const cats = computed(() => data.value?.pages.flat() ?? []);
             v-if="isLoading"
             class="flex max-lg:flex-col gap-2 lg:justify-between items-center pb-8"
         >
-            <CatLoading v-for="n in LIMIT" :key="n" />
+            <CatLoading v-for="n in 4" :key="n" />
         </div>
         <div v-else-if="isError">Error: {{ error }}</div>
         <div v-else>
