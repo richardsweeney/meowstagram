@@ -3,7 +3,7 @@ import { useTemplateRef, watch, watchEffect } from "vue";
 import { RouterLink } from "vue-router";
 import type { Breed } from "@/lib/breeds";
 
-const dialog = useTemplateRef<HTMLDialogElement>("dialog");
+const dialogRef = useTemplateRef<HTMLDialogElement>("dialog");
 const activeBreed = defineModel<Breed | null>("activeBreed", {
     required: true,
 });
@@ -13,7 +13,7 @@ function onDialogClose() {
 }
 
 function onBackdropClick(event: MouseEvent) {
-    if (event.target === dialog.value) {
+    if (event.target === dialogRef.value) {
         activeBreed.value = null;
     }
 }
@@ -22,12 +22,12 @@ watch(
     activeBreed,
     () => {
         if (activeBreed.value) {
-            if (!dialog.value?.open) {
-                dialog.value?.showModal();
+            if (!dialogRef.value?.open) {
+                dialogRef.value?.showModal();
                 document.body.classList.add("overflow-hidden");
             }
         } else {
-            dialog.value?.close();
+            dialogRef.value?.close();
             document.body.classList.remove("overflow-hidden");
         }
     },
