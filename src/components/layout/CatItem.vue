@@ -105,6 +105,7 @@ const deleteImage = () => {
 <template>
     <div class="relative pb-8 lg:pb-12">
         <img
+            loading="lazy"
             :src="cat.url"
             alt="A Cat image"
             class="aspect-square object-cover shadow-2xl h-full w-full rounded-lg block"

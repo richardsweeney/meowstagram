@@ -44,9 +44,10 @@ const breeds = computed(() => data.value?.pages?.flat() || []);
                             class="relative block w-full overflow-hidden rounded-lg shadow-2xl transition-all cursor-pointer hover:scale-105"
                         >
                             <img
+                                loading="lazy"
                                 v-if="breed?.image?.url"
-                                class="aspect-square object-cover h-full w-full"
                                 :src="breed?.image?.url"
+                                class="aspect-square object-cover h-full w-full"
                             />
                             <div
                                 v-else

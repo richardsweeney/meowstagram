@@ -66,7 +66,7 @@ const cats = computed(() => data.value?.pages.flat() ?? []);
                         :to="{ path: '/' }"
                         class="underline text-teal-500 underline-offset-2"
                     >
-                        Back to all breeds
+                        Show all cats
                     </RouterLink>
                 </div>
             </div>

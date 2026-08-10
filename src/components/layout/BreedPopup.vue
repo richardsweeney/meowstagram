@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { onUnmounted, ref, useModel, watch } from "vue";
+import { useTemplateRef, watch, watchEffect } from "vue";
 import { RouterLink } from "vue-router";
 import type { Breed } from "@/lib/breeds";
 
-const dialog = ref<HTMLDialogElement | null>(null);
-
-const props = defineProps<{ activeBreed: Breed | null }>();
-const activeBreed = useModel(props, "activeBreed");
+const dialog = useTemplateRef<HTMLDialogElement>("dialog");
+const activeBreed = defineModel<Breed | null>("activeBreed", {
+    required: true,
+});
 
 function onDialogClose() {
     activeBreed.value = null;
@@ -18,18 +18,29 @@ function onBackdropClick(event: MouseEvent) {
     }
 }
 
-watch(activeBreed, () => {
-    if (activeBreed?.value) {
-        dialog?.value?.showModal();
-        document.body.classList.add("overflow-hidden");
-    } else {
-        dialog?.value?.close();
-        document.body.classList.remove("overflow-hidden");
-    }
-});
+watch(
+    activeBreed,
+    () => {
+        if (activeBreed.value) {
+            if (!dialog.value?.open) {
+                dialog.value?.showModal();
+                document.body.classList.add("overflow-hidden");
+            }
+        } else {
+            dialog.value?.close();
+            document.body.classList.remove("overflow-hidden");
+        }
+    },
+    { immediate: true, flush: "post" },
+);
 
-onUnmounted(() => {
-    document.body.classList.remove("overflow-hidden");
+watchEffect((onCleanup) => {
+    if (!activeBreed.value) {
+        return;
+    }
+    document.body.classList.add("overflow-hidden");
+
+    onCleanup(() => document.body.classList.remove("overflow-hidden"));
 });
 </script>
 
@@ -40,7 +51,7 @@ onUnmounted(() => {
         @click="onBackdropClick"
         class="rounded-lg p-0 m-auto backdrop:bg-black/50"
     >
-        <div v-if="activeBreed" class="w-full max-w-6xl p-4 lg:p-8 relative">
+        <div v-if="activeBreed" class="w-full max-w-2xl p-4 lg:p-8 relative">
             <div class="flex justify-between pb-8">
                 <h3 class="text-2xl font-semibold">
                     {{ activeBreed.name }}
@@ -54,9 +65,9 @@ onUnmounted(() => {
                 </button>
             </div>
 
-            <div class="md:grid md:grid-cols-3 gap-8">
+            <div>
                 <img
-                    class="w-full rounded-lg col-span-2 shadow-lg max-md:mb-6"
+                    class="w-full aspect-square h-full object-cover rounded-lg col-span-2 shadow-lg mb-6"
                     :src="activeBreed.image.url"
                 />
                 <div class="h-full place-content-center space-y-4 pb-4">
