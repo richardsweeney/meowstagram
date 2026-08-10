@@ -8,11 +8,12 @@ import { useInfiniteQuery, useQuery } from "@tanstack/vue-query";
 import CatItem from "../layout/CatItem.vue";
 import { useRoute } from "vue-router";
 import CatLoading from "../layout/CatLoading.vue";
+import Button from "../style/Button.vue";
 
 const route = useRoute();
 const breed = computed(() => (route.query.breed as string) || "");
 
-const LIMIT = 8;
+const LIMIT = 4;
 
 const {
     isLoading,
@@ -44,36 +45,39 @@ const cats = computed(() => data.value?.pages.flat() ?? []);
 </script>
 
 <template>
-    <CatLoading v-if="isLoading" v-for="n in LIMIT" :key="n" />
-    <div v-else-if="isError">Error: {{ error }}</div>
-    <div v-else>
-        <div v-if="isBreedQueryEnabled">
-            <div
-                v-if="breedData"
-                class="flex max-lg:flex-col gap-2 lg:justify-between items-center pb-8"
-            >
-                <h2 class="text-2xl">
-                    Cats in breed: <strong>{{ breedData.name }}</strong>
-                </h2>
-                <RouterLink
-                    :to="{ path: '/' }"
-                    class="underline text-teal-500 underline-offset-2"
-                >
-                    Back to all breeds
-                </RouterLink>
-            </div>
+    <div>
+        <div
+            v-if="isLoading"
+            class="flex max-lg:flex-col gap-2 lg:justify-between items-center pb-8"
+        >
+            <CatLoading v-for="n in LIMIT" :key="n" />
         </div>
+        <div v-else-if="isError">Error: {{ error }}</div>
+        <div v-else>
+            <div v-if="isBreedQueryEnabled">
+                <div
+                    v-if="breedData"
+                    class="flex max-lg:flex-col gap-2 lg:justify-between items-center pb-8"
+                >
+                    <h2 class="text-2xl">
+                        Cats in breed: <strong>{{ breedData.name }}</strong>
+                    </h2>
+                    <RouterLink
+                        :to="{ path: '/' }"
+                        class="underline text-teal-500 underline-offset-2"
+                    >
+                        Back to all breeds
+                    </RouterLink>
+                </div>
+            </div>
 
-        <CatItem v-for="cat in cats" :cat="cat" :key="cat.id" />
+            <CatItem v-for="cat in cats" :cat="cat" :key="cat.id" />
 
-        <div v-if="hasNextPage" class="mt-8 flex justify-center">
-            <button
-                class="rounded bg-linear-45 from-sunset-yellow via-sunset-coral to-sunset-pink text-gray-900 shadow-lg px-4 py-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                :disabled="isFetchingNextPage"
-                @click="fetchNextPage()"
-            >
-                {{ isFetchingNextPage ? "Loading..." : "Load more" }}
-            </button>
+            <div v-if="hasNextPage" class="mt-8 flex justify-center">
+                <Button :disabled="isFetchingNextPage" @click="fetchNextPage()">
+                    {{ isFetchingNextPage ? "Loading..." : "Load more" }}
+                </Button>
+            </div>
         </div>
     </div>
 </template>

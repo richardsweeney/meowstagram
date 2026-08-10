@@ -5,7 +5,7 @@ import IconStar from "../icons/IconStar.vue";
 </script>
 
 <template>
-    <div class="pb-8">
+    <div class="pb-8 w-full">
         <div
             class="aspect-square object-cover shadow-2xl h-full w-full rounded-lg block bg-gray-300 animate-pulse"
         ></div>

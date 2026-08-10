@@ -87,6 +87,7 @@ const onDrop = (e: DragEvent) => {
 </script>
 
 <template>
+  <div>
     <h2 class="font-bold text-2xl pb-4">Upload your own cat image!</h2>
     <div
         class="border-2 border-dashed rounded-lg p-16 min-h-64 flex items-center justify-center text-center cursor-pointer transition-colors"
@@ -130,4 +131,5 @@ const onDrop = (e: DragEvent) => {
             <CatItem :cat="cat" v-for="cat in images" :key="cat.id" />
         </div>
     </div>
+  </div>
 </template>

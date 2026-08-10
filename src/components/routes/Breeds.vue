@@ -45,6 +45,7 @@ const breeds = computed(() => data.value?.pages?.flat() || []);
 </script>
 
 <template>
+  <div>
     <div>
         <div>
             <div v-if="isLoading" class="grid grid-cols-2 gap-4">
@@ -128,4 +129,5 @@ const breeds = computed(() => data.value?.pages?.flat() || []);
             </div>
         </div>
     </dialog>
+  </div>
 </template>

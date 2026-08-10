@@ -1,28 +1,6 @@
-<script setup lang="ts">
-type Props = {
-    primary?: boolean;
-    secondary?: boolean;
-    destructive?: boolean;
-    disabled?: boolean;
-};
-
-const {
-    primary = false,
-    disabled = false,
-    secondary = false,
-    destructive = false,
-} = defineProps<Props>();
-</script>
-
 <template>
     <button
-        class="rounded px-4 py-2 cursor-pointer disabled:opacity-60 disabled:cursor-progress"
-        :class="{
-            'bg-teal-500 text-white': primary && !secondary && !destructive,
-            'border border-teal-600 text-teal-600': secondary,
-            'border border-red-600 text-red-600': destructive,
-        }"
-        :disabled="disabled"
+        class="rounded bg-linear-45 from-sunset-yellow via-sunset-coral to-sunset-pink text-gray-900 shadow-lg px-4 py-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         v-bind="$attrs"
     >
         <slot></slot>
