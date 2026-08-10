@@ -48,7 +48,7 @@ const cats = computed(() => data.value?.pages.flat() ?? []);
     <div>
         <div
             v-if="isLoading"
-            class="flex max-lg:flex-col gap-2 lg:justify-between items-center pb-8"
+            class="flex flex-col gap-2 lg:justify-between items-center pb-8"
         >
             <CatLoading v-for="n in 4" :key="n" />
         </div>
@@ -60,7 +60,7 @@ const cats = computed(() => data.value?.pages.flat() ?? []);
                     class="flex max-lg:flex-col gap-2 lg:justify-between items-center pb-8"
                 >
                     <h2 class="text-2xl">
-                        Cats in breed: <strong>{{ breedData.name }}</strong>
+                        Cats in breed: <strong>{{ breedData?.name }}</strong>
                     </h2>
                     <RouterLink
                         :to="{ path: '/' }"
