@@ -103,7 +103,7 @@ const deleteImage = () => {
 </script>
 
 <template>
-    <div class="relative pb-12">
+    <div class="relative pb-8 lg:pb-12">
         <img
             :src="cat.url"
             alt="A Cat image"
@@ -140,7 +140,10 @@ const deleteImage = () => {
                 aria-label="Rate this cat"
                 @mouseleave="hoverRating = null"
             >
-                <p class="text-sm">Rate this image:</p>
+                <p class="text-sm">
+                    <span class="hidden lg:visible">Rate this image:</span>
+                    <span class="lg:hidden">Rate:</span>
+                </p>
                 <button
                     v-for="n in 5"
                     :key="n"

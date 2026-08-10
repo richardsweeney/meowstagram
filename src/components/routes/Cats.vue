@@ -50,7 +50,7 @@ const cats = computed(() => data.value?.pages.flat() ?? []);
         <div v-if="isBreedQueryEnabled">
             <div
                 v-if="breedData"
-                class="flex justify-between items-center pb-8"
+                class="flex max-lg:flex-col gap-2 lg:justify-between items-center pb-8"
             >
                 <h2 class="text-2xl">
                     Cats in breed: <strong>{{ breedData.name }}</strong>
@@ -68,7 +68,7 @@ const cats = computed(() => data.value?.pages.flat() ?? []);
 
         <div v-if="hasNextPage" class="mt-8 flex justify-center">
             <button
-                class="rounded bg-teal-500 text-white px-4 py-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                class="rounded bg-linear-45 from-sunset-yellow via-sunset-coral to-sunset-pink text-gray-900 shadow-lg px-4 py-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 :disabled="isFetchingNextPage"
                 @click="fetchNextPage()"
             >

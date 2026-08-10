@@ -1,1 +1,12 @@
+@import "@fontsource/noto-sans/400.css";
+@import "@fontsource/noto-sans/500.css";
+@import "@fontsource/noto-sans/600.css";
+@import "@fontsource/noto-sans/700.css";
 @import "tailwindcss";
+
+@theme {
+    --font-sans: "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+    --color-sunset-yellow: #fada61;
+    --color-sunset-coral: #ff9188;
+    --color-sunset-pink: #ff5acd;
+}

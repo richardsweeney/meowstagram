@@ -70,7 +70,7 @@ const breeds = computed(() => data.value?.pages?.flat() || []);
                             class="aspect-square h-full w-full bg-gray-500"
                         ></div>
                         <div
-                            class="absolute inset-0 flex items-center justify-center bg-black/30 text-white font-bold text-xl"
+                            class="absolute inset-0 flex items-center justify-center bg-black/30 text-white font-semibold text-xl"
                         >
                             {{ breed.name }}
                         </div>
@@ -81,7 +81,7 @@ const breeds = computed(() => data.value?.pages?.flat() || []);
 
         <div v-if="hasNextPage" class="mt-8 flex justify-center">
             <button
-                class="rounded bg-teal-500 text-white px-4 py-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                class="rounded bg-linear-45 from-sunset-yellow via-sunset-coral to-sunset-pink text-gray-900 shadow-lg px-4 py-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 :disabled="isFetchingNextPage"
                 @click="fetchNextPage()"
             >
@@ -96,7 +96,7 @@ const breeds = computed(() => data.value?.pages?.flat() || []);
         @close="onDialogClose"
         @click="onBackdropClick"
     >
-        <div v-if="activeBreed" class="w-full max-w-6xl p-8 relative">
+        <div v-if="activeBreed" class="w-full max-w-6xl p-4 lg:p-8 relative">
             <div class="flex justify-between pb-8">
                 <h3 class="text-2xl font-semibold">{{ activeBreed.name }}</h3>
                 <button
@@ -110,10 +110,10 @@ const breeds = computed(() => data.value?.pages?.flat() || []);
 
             <div class="md:grid md:grid-cols-3 gap-8">
                 <img
-                    class="w-full rounded-lg col-span-2 shadow-lg"
+                    class="w-full rounded-lg col-span-2 shadow-lg max-md:mb-6"
                     :src="activeBreed.image.url"
                 />
-                <div class="h-full place-content-center space-y-4">
+                <div class="h-full place-content-center space-y-4 pb-4">
                     <p>{{ activeBreed.description }}</p>
                     <p>
                         <strong>Temperament:</strong>
